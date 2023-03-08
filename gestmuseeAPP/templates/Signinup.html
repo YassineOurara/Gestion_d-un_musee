@@ -1,0 +1,177 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/abon.css' %}" />
+    <link rel="icon" type="image/png" href="{% static 'img/home/darJ.png'%}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DarJ-SignIn-Up</title>
+</head>
+
+<body>
+    <!-- <video src="img/museevideo.mp4" muted loop autoplay></video> -->
+    <section class="aa">
+    <div class="container">
+
+            <div class="alert alert-success m-2" id="popup" role="alert"> 
+                {% for message in messages %} 
+                    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+                     {% if message.tags == 'error' %} 
+                    <script>
+                        swal({
+                            title: "Erreur :(",
+                            text: "Le mot de passe que vous avez entrer est incorrect ressayer",
+                            icon: "warning",
+                            buttons: true,
+                          });
+                    </script>                    
+                     {% elif message.tags == 'warning'%}
+                    <script>
+                        swal({
+                            title: "Erreur :(",
+                            text: "L'email que vous avez entrer est déjà existé. Merci de le changer",
+                            icon: "warning",
+                            buttons: true,
+                          });
+                    </script>
+                    {% elif  message.tags == 'info'%}
+                    <script>
+                        swal({
+                            title: "Erreur :(",
+                            text: "Le mot de passe de confirmation ne correspond pas au premier mot de passe",
+                            icon: "warning",
+                            buttons: true,
+                          });
+                    </script>
+                     {% else %}
+                        <script>
+                            swal({
+                                title: "Très Bien :)",
+                                text: "Votre compte est crée avec succés",
+                                icon: "success",
+                                button: "Login !",
+                              });
+                        </script>
+                     {% endif %}
+                {% endfor %}
+            </div>  
+        
+
+            <div class="signin-signup">
+                
+                <!--                    Sign in Forum                 -->
+                <form class="sign-in-form" method="post">
+                    {% csrf_token %}
+                    {{form1.as_p}}
+                    <h2 class="title" id="titre1">Connectez-vous</h2>
+                    <div class="input-field">
+                        <i class="fas fa-user"></i>
+                        <input type="text" placeholder="Email" name="email" required/>
+                    </div>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Mot de passe" name="password" required/>
+                    </div>
+                    
+                    <input class="btn" type="submit" value="Connecter" name="btnform1"/>
+                    <!-- <p class="account-text">Etes-vous déjà inscris ? <a href="#" id="sign-up-btn2">Inscrire</a></p> -->
+
+                </form>
+
+                <!--                    Sign up Forum                 -->
+                <form class="sign-up-form" method="post">
+                    {% csrf_token %}
+                     {{form2.as_p}}
+                    <h2 class="title" id="titre">Inscrivez-vous</h2>
+                    <div class="input-name">
+                        <div class="input-field" id="test1">
+                            <i class="fas fa-user"></i>
+                            <input type="text" placeholder="Prenom" name="first_name" required/>
+                        </div>    
+                        <div class="input-field" id="test2">
+                            <i class="fas fa-user"></i>
+                            <input type="text" placeholder="Nom" name="last_name" required/>
+                        </div>
+                        <div class="input-field" id="test1">
+                            <i class="fa-solid fa-cards-blank"></i>
+                            <input type="text" placeholder="Num Carte" name="num_carte" required/>
+                        </div>
+                    </div>
+                    <div class="input-field" id="formulaire">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" placeholder="Email" name="email" required/>
+                    </div>
+                    <div class="input-field" id="formulaire">
+                        <select name="type" id="type">
+                            <option value="Etudiant">Public</option>
+                            <option value="Etudiant">Etudiant</option>
+                            <option value="Eleve">Eleve</option>
+                            <option value="Etudiant">Comité d'entreprise</option>
+                            <option value="Etudiant">Etudiant d'art</option>
+                          </select>
+                    </div>
+                    <div class="input-field" id="formulaire">
+                        <select name="type_abon" id="type_abon">
+                            <option value="Trimestriel">Trimestriel</option>
+                            <option value="Mensuel">Mensuel</option>
+                            <option value="Annuel">Annuel</option>
+                          </select>
+                    </div>
+                    <div class="input-field" id="formulaire">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Mot de passe" name="password" required/>
+                    </div>
+                    <div class="input-field" id="formulaire">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Confirmer Mot de passe" name="cpassword" required/>
+                    </div>
+                    <input type="submit" class="btn" value="Inscrire" id="formulaire" name="btnform2"/>
+                    <!-- <p class="account-text">Avez-vous déjà un compte ?<a href="#" id="sign-in-btn2">Connecter</a></p> -->
+                
+                </form>
+
+            </div>
+
+        <div class="panels-container">
+            
+            <div class="panel left-panel">
+                <div class="content">
+                    
+                    <h3>Un de nous ?</h3>
+                    <p>
+                        Bah ! Rebienvenue dans votre site et bonne visite
+                        
+                    </p>
+                    <button class="btn" id="sign-in-btn">Connecter</button>
+
+                </div>
+                {% comment %} <img src="{% static 'img/home/home2.png'%}" class="image" alt="" /> {% endcomment %}
+            </div>
+
+            <div class="panel right-panel">
+                <div class="content">
+                    <h3>Nouveau Ici ?</h3>
+                    <p>
+                       Visitez l'endroit où la musique et l'histoire se rassemblent
+                    </p>
+                    <button class="btn" id="sign-up-btn">Inscrire</button>
+
+                </div>
+                {% comment %} <img src="{% static 'img/home/home2.png'%}" class="image" alt="" /> {% endcomment %}
+                    
+            </div>
+        </div> 
+
+    </div>
+    </section>
+
+
+    <script src="{% static 'js/abon.js'%}">
+        
+    </script>
+</body>
+
+</html>
